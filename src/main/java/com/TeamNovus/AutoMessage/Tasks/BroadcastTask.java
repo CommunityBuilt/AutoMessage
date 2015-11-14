@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import com.TeamNovus.AutoMessage.AutoMessage;
 import com.TeamNovus.AutoMessage.Models.MessageList;
 import com.TeamNovus.AutoMessage.Models.MessageLists;
+import org.bukkit.ChatColor;
 
 public class BroadcastTask implements Runnable {
 	private String name;
@@ -24,16 +25,17 @@ public class BroadcastTask implements Runnable {
 			if (list.isEnabled() && list.hasMessages() && !(list.isExpired())) {
 				if (Bukkit.getServer().getOnlinePlayers().size() >= AutoMessage.plugin.getConfig().getInt("settings.min-players")) {
 					int index = list.isRandom() ? new Random().nextInt(list.getMessages().size()) : list.getCurrentIndex();
-
-					for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-						if (p.hasPermission("automessage.receive." + name)) {
-							list.broadcastTo(index, p);
-						}
-					}
-
-					if (AutoMessage.plugin.getConfig().getBoolean("settings.log-to-console")) {
-						list.broadcastTo(index, Bukkit.getConsoleSender());
-					}
+                                        
+                                        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes("&".charAt(0), list.getMessage(index).getMessage()));
+//					for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+//						if (p.hasPermission("automessage.receive." + name)) {
+//							list.broadcastTo(index, p);
+//						}
+//					}
+//
+//					if (AutoMessage.plugin.getConfig().getBoolean("settings.log-to-console")) {
+//						list.broadcastTo(index, Bukkit.getConsoleSender());
+//					}
 
 					list.setCurrentIndex(index + 1);
 				}
