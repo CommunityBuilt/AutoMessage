@@ -19,7 +19,6 @@ import com.TeamNovus.AutoMessage.Commands.Common.CommandManager;
 import com.TeamNovus.AutoMessage.Models.Message;
 import com.TeamNovus.AutoMessage.Models.MessageList;
 import com.TeamNovus.AutoMessage.Models.MessageLists;
-import com.TeamNovus.AutoMessage.Util.Metrics;
 
 public class AutoMessage extends JavaPlugin {
 	public static AutoMessage plugin;
@@ -37,14 +36,6 @@ public class AutoMessage extends JavaPlugin {
 
 		// Load the configuration.
 		if (loadConfig()) {
-			// Start metrics.
-			try {
-				Metrics metrics = new Metrics(this);
-
-				metrics.start();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -87,8 +78,6 @@ public class AutoMessage extends JavaPlugin {
 			if (getConfig().contains("message-lists." + key + ".interval"))
 				list.setInterval(getConfig().getInt("message-lists." + key + ".interval"));
 
-			if (getConfig().contains("message-lists." + key + ".expiry"))
-				list.setExpiry(getConfig().getLong("message-lists." + key + ".expiry"));
 
 			if (getConfig().contains("message-lists." + key + ".random"))
 				list.setRandom(getConfig().getBoolean("message-lists." + key + ".random"));
@@ -137,7 +126,6 @@ public class AutoMessage extends JavaPlugin {
 			MessageList list = MessageLists.getExactList(key);
 			getConfig().set("message-lists." + key + ".enabled", list.isEnabled());
 			getConfig().set("message-lists." + key + ".interval", list.getInterval());
-			getConfig().set("message-lists." + key + ".expiry", list.getExpiry());
 			getConfig().set("message-lists." + key + ".random", list.isRandom());
 
 			List<String> messages = new LinkedList<String>();
