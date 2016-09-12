@@ -7,7 +7,9 @@
 	<name>AutoMessage</name>
 	<version>3.0.CBG</version>
 	<url>http://www.novuscraft.org</url>
-
+        <properties>
+            <bukkitVersion>1.10.2-R0.1-SNAPSHOT</bukkitVersion>      
+        </properties>
 	<build>
 		<finalName>AutoMessage</finalName>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -46,22 +48,21 @@
 	</build>
 
 	<repositories>
-		<!-- Bukkit -->
+                <!-- SpigotMC Repo (Bukkit and SpigotAPI) -->
 		<repository>
-			<id>bukkit</id>
-			<name>Bukkit</name>
-			<url>http://repo.bukkit.org/content/groups/public/</url>
+			<id>spigot-repo</id>
+			<url>https://hub.spigotmc.org/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
 	<dependencies>
 		<!-- Bukkit -->
-		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.7.10-R0.1-SNAPSHOT</version>
-		 <type>jar</type>
-		</dependency>
+                <!-- Spigot-Api, https://www.spigotmc.org/ Based on the Bukkit project, http://bukkit.org/ -->
+                <dependency>
+                        <groupId>org.spigotmc</groupId>
+                        <artifactId>spigot-api</artifactId>
+                        <version>${bukkitVersion}</version>
+                </dependency>
 
 		<!-- JUnit -->
 		<dependency>
